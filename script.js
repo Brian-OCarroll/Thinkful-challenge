@@ -3,9 +3,9 @@ const youtube_search_url =
 
 function getDataFromApi(searchTerm, callback) {
     const query = {
-        part:'snippit',
-        key:AIzaSyD_wDVgxVvy12tK2DDDhCsFXhHiMhv6ihM,
-        q:`${searchTerm} in:name`,
+        part:'snippet',
+        key:'AIzaSyD_wDVgxVvy12tK2DDDhCsFXhHiMhv6ihM',
+        q:`${searchTerm}`,
         maxResults: '5',
     }
     $.getJSON(youtube_search_url, query, callback);
@@ -14,13 +14,15 @@ function getDataFromApi(searchTerm, callback) {
 function renderResult(result) {
     let videoID = `https://www.youtube.com/watch?v=${result.id.videoId}`
     return `
-        <div><a class="js-result-insert" target='_blank' href="videoID">
-        <div class="js-result-title">${result.snippet.title}</div>
-        <div class="js-result-thumbnail"${result.snippet.thumbnails.medium.url}</div>
+        <div><a class="js-result-title" target='_blank' href="videoID">
+        ${result.snippet.title}
+        </a>
+        </div>
+        <div><a class="js-result-thumbnail" target='_blank' href='videoID'>
+        <img src="${result.snippet.thumbnails.medium.url}" alt="youtube-thumbnail">
         </a>
         </div>
     `;
-        //how would I test to see if I was retrieving the right information?
 }
 
 function displayYoutubeSearchData(data) {
